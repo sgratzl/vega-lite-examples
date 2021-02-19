@@ -70,6 +70,7 @@
         }
         const name = s.selectedOptions[0].textContent;
         document.title = document.querySelector("h1").textContent;
+        window.history.pushState({url, name}, document.title, `#${url}`);
         fetch(`./specs/${url}`)
           .then((r) => r.json())
           .then((r) => {
