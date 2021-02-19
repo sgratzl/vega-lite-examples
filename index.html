@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Vega Lite Examples</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        body {
+            margin: 0;
+        }
+        .vis {
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <h1>Vega Lite Example: 
+    <select>
+        <option value="parallel-coordinates-plot.vl.json">Parallel Coordinates Plot</option>
+    </select>
+</h1>
+    <div id="vis"></div>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+    <script>
+        const viaHash = window.location.hash.slice('1');
+
+        const s = document.querySelector('select');
+        function update() {
+            const url = s.value;
+            if (!url) {
+                return;
+            }
+            const name = s.selectedOptions[0].textContent;  
+            document.title = document.querySelector('h1').textContent;
+            fetch(`./specs/${url}`).then((r) => r.json()).then((r) => {
+                old = vegaEmbed('#vis', r);
+            });
+        }
+        s.addEventListener('change', update);
+        // initial selection
+        const initial = (s.options.namedItem(viaHash) || s.options.item(0));
+        initial.selected = true;
+        update();
+    </script>
+</body>
+</html>
