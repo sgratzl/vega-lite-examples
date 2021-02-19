@@ -1,55 +1,86 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+
     <title>Vega Lite Examples</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-        body {
-            margin: 0;
-        }
-        .vis {
-            width: 100vw;
-            height: 100vh;
-        }
+      body {
+        margin: 1em;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+          "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+          "Helvetica Neue", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      select {
+          font-size: inherit;
+      }
+
+      code {
+        font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+          monospace;
+      }
     </style>
-</head>
-<body>
-    <h1>Vega Lite Example: 
-    <select>
-        <option value="parallel-coordinates-plot.vl.json">Parallel Coordinates Plot</option>
-        <option value="projection-geo-centroid.vl.json">Map Projection with Center Dot</option>
-        <option value="hexgrid-shape.vl.json">Hexagon Matrix using SVG Shapes</option>
-        <option value="hexgrid-utf.vl.json">Hexagon Matrix using Unicode Icons</option>
-        <option value="hexgrid-base.vl.json">Hexagon Matrix Base Generation</option>
-        <option value="interval-delta.vl.json">Selected Interval Delta Indicator</option>
-    </select>
-</h1>
+  </head>
+  <body>
+    <h1>
+      Vega Lite Example:
+      <select>
+        <option value="parallel-coordinates-plot.vl.json">
+          Parallel Coordinates Plot
+        </option>
+        <option value="projection-geo-centroid.vl.json">
+          Map Projection with Center Dot
+        </option>
+        <option value="hexgrid-shape.vl.json">
+          Hexagon Matrix using SVG Shapes
+        </option>
+        <option value="hexgrid-utf.vl.json">
+          Hexagon Matrix using Unicode Icons
+        </option>
+        <option value="hexgrid-base.vl.json">
+          Hexagon Matrix Base Generation
+        </option>
+        <option value="interval-delta.vl.json">
+          Selected Interval Delta Indicator
+        </option>
+      </select>
+    </h1>
     <div id="vis"></div>
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
     <script>
-        const viaHash = window.location.hash.slice('1');
+      const viaHash = window.location.hash.slice("1");
 
-        const s = document.querySelector('select');
-        function update() {
-            const url = s.value;
-            if (!url) {
-                return;
-            }
-            const name = s.selectedOptions[0].textContent;  
-            document.title = document.querySelector('h1').textContent;
-            fetch(`./specs/${url}`).then((r) => r.json()).then((r) => {
-                old = vegaEmbed('#vis', r);
-            });
+      const s = document.querySelector("select");
+      function update() {
+        const url = s.value;
+        if (!url) {
+          return;
         }
-        s.addEventListener('change', update);
-        // initial selection
-        const initial = (s.options.namedItem(viaHash) || s.options.item(0));
-        initial.selected = true;
-        update();
+        const name = s.selectedOptions[0].textContent;
+        document.title = document.querySelector("h1").textContent;
+        fetch(`./specs/${url}`)
+          .then((r) => r.json())
+          .then((r) => {
+            old = vegaEmbed("#vis", r);
+          });
+      }
+      s.addEventListener("change", update);
+      // initial selection
+      const initial = s.options.namedItem(viaHash) || s.options.item(0);
+      initial.selected = true;
+      update();
     </script>
-</body>
+  </body>
 </html>
