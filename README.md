@@ -10,6 +10,12 @@ https://www.sgratzl.com/vega-lite-examples/index.html#parallel-coordinates-plot.
 
 ![image](https://user-images.githubusercontent.com/4129778/108562011-7def6500-72ff-11eb-83ce-12ac70c8400c.png)
 
+## Parallel Sets
+
+https://www.sgratzl.com/vega-lite-examples/index.html#parallel-sets.vl.json
+
+![image](https://user-images.githubusercontent.com/4129778/108878305-6d413680-7600-11eb-8450-f603ab757376.png)
+
 ## Hexagon Matrix
 
 ### Using SVG Paths
